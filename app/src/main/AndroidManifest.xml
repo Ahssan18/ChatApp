@@ -3,6 +3,7 @@
     package="com.practice.chatapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,10 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChatApp">
         <activity
-            android:name=".ui.SignInActivity"
+            android:name=".ui.InboxActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.CreateUserActivity"
+            android:name=".ui.UsersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ConversationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.SignInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +29,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.CreateUserActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

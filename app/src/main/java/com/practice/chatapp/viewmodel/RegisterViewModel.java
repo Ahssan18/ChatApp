@@ -14,10 +14,12 @@ import com.practice.chatapp.repository.RegisterRepository;
 public class RegisterViewModel extends ViewModel {
     private RegisterRepository registerRepository;
     private LiveData<User> userLiveData;
+    private LiveData<String> error;
 
     public RegisterViewModel() {
         registerRepository = new RegisterRepository();
         userLiveData = registerRepository.getUser();
+        error = registerRepository.getError();
     }
 
     public void createUser(String email, String pass) {
@@ -26,5 +28,9 @@ public class RegisterViewModel extends ViewModel {
 
     public LiveData<User> getUser() {
         return userLiveData;
+    }
+
+    public LiveData<String> getError() {
+        return error;
     }
 }

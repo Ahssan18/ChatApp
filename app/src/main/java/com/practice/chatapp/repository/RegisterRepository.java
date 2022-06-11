@@ -24,10 +24,13 @@ public class RegisterRepository {
     private FirebaseAuth mAuth;
     private String TAG = "RegisterRepository";
     private MutableLiveData<User> userLiveData;
+    private MutableLiveData<String> error;
+
 
     public RegisterRepository() {
         mAuth = FirebaseAuth.getInstance();
         userLiveData = new MutableLiveData<>();
+        error = new MutableLiveData<>();
 
     }
 
@@ -38,8 +41,9 @@ public class RegisterRepository {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
-                        userLiveData.postValue(new User(user.getEmail(), user.getUid()));
+                        userLiveData.postValue(new User(user.getEmail(), user.getUid(), user.getEmail().split("@")[0]));
                     } else {
+                        error.postValue(String.valueOf(task.getException()));
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
 //                        Toast.makeText(context, "Authentication failed.",Toast.LENGTH_SHORT).show();
@@ -49,5 +53,9 @@ public class RegisterRepository {
 
     public LiveData<User> getUser() {
         return userLiveData;
+    }
+
+    public LiveData<String> getError() {
+        return error;
     }
 }

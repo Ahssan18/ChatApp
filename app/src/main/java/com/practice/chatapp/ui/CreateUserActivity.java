@@ -1,5 +1,6 @@
 package com.practice.chatapp.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.practice.chatapp.R;
 import com.practice.chatapp.databinding.ActivityCreateUserBinding;
 import com.practice.chatapp.model.User;
@@ -15,6 +17,7 @@ import com.practice.chatapp.viewmodel.RegisterViewModel;
 
 public class CreateUserActivity extends AppCompatActivity {
 
+    FirebaseAuth auth;
     private ActivityCreateUserBinding binding;
     private RegisterViewModel viewModel;
 
@@ -35,9 +38,18 @@ public class CreateUserActivity extends AppCompatActivity {
                 Toast.makeText(CreateUserActivity.this, "User is created successfully : " + user.toString(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        viewModel.getError().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                startActivity(new Intent(CreateUserActivity.this, SignInActivity.class));
+                Toast.makeText(CreateUserActivity.this, s, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void initViews() {
+        auth=FirebaseAuth.getInstance();
         viewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
     }
 
