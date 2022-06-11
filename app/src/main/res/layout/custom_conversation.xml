@@ -21,11 +21,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:textStyle="bold"
         android:text="UserName"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/iv_user"
         app:layout_constraintLeft_toRightOf="@id/iv_user"
         app:layout_constraintTop_toTopOf="@+id/iv_user" />
+
+    <TextView
+        android:id="@+id/tv_last_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="hy this is my last message"
+        app:layout_constraintLeft_toRightOf="@id/iv_user"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_name" />
+
+    <TextView
+        android:id="@+id/tv_time_stamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="30/12/1997 2:45 am"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.888"
+        app:layout_constraintLeft_toRightOf="@id/tv_user_name"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.511" />
 
     <View
         android:layout_width="match_parent"

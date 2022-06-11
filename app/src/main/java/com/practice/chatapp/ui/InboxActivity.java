@@ -19,6 +19,7 @@ public class InboxActivity extends AppCompatActivity {
     private ActivityInboxBinding binding;
     private InboxAdapter adapter;
     private List<Message> messageList;
+    private String name, conversationId;
     private MessagesViewModel viewModel;
     private PreferenceManger preferenceManger;
 
@@ -28,13 +29,20 @@ public class InboxActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityInboxBinding.inflate(getLayoutInflater());
         initWidgets();
+        setData();
         clickLister();
         observeData();
         setContentView(binding.getRoot());
     }
 
+    private void setData() {
+        binding.tvUserName.setText(name);
+    }
+
     private void initWidgets() {
 
+        conversationId = getIntent().getStringExtra("conversationId");
+        name = getIntent().getStringExtra("name");
         preferenceManger = new PreferenceManger(this);
         viewModel = new ViewModelProvider(this).get(MessagesViewModel.class);
         adapter = new InboxAdapter(messageList, this);
@@ -46,7 +54,7 @@ public class InboxActivity extends AppCompatActivity {
         binding.btnSend.setOnClickListener(view -> {
             String message = binding.etMessage.getText().toString();
             if (!message.isEmpty()) {
-                viewModel.sendMessage(message, "", preferenceManger.getUserId());
+                viewModel.sendMessage(message, conversationId, preferenceManger.getUserId());
             }
         });
     }

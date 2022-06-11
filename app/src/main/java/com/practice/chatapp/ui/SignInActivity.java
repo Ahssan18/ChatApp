@@ -1,12 +1,13 @@
 package com.practice.chatapp.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.practice.chatapp.Utils.PreferenceManger;
 import com.practice.chatapp.databinding.ActivitySignInBinding;
 import com.practice.chatapp.viewmodel.SignInViewModel;
 
@@ -14,6 +15,15 @@ public class SignInActivity extends AppCompatActivity {
 
     private ActivitySignInBinding binding;
     private SignInViewModel signInViewModel;
+    private PreferenceManger preferenceManger = new PreferenceManger(this);
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (preferenceManger.getUserId().equals("-1")) {
+            startActivity(new Intent(this, ConversationActivity.class));
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +38,7 @@ public class SignInActivity extends AppCompatActivity {
     private void observeData() {
         signInViewModel.getUserData().observe(this, user -> {
             Toast.makeText(this, "Successfully Login :" + user.toString(), Toast.LENGTH_SHORT).show();
+            preferenceManger.setUser(user);
             startActivity(new Intent(this, ConversationActivity.class));
         });
         signInViewModel.getError().observe(this, error -> {
