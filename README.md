@@ -1,7 +1,7 @@
 # ChatApp
 ## Chat App with Firebase using MVVM
                                          
-Register User
+### Register User
 
 
 
