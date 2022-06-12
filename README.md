@@ -1,5 +1,5 @@
 # ChatApp
-# Chat App with Firebase using MVVM
+<h3>Chat App with Firebase using MVVM</h3>
                                           Register User:
 ![register](https://user-images.githubusercontent.com/49828571/173252821-8f02d6f6-0df9-4ff4-8712-0bfb1b073831.jpg)
                                           Login User:
