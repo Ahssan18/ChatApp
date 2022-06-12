@@ -41,6 +41,7 @@ public class AllUsersAdapter extends RecyclerView.Adapter<AllUsersAdapter.Custom
             intent.putExtra("name", usersList.get(position).getName());
             String conversationid = preferenceManger.getUserId() + usersList.get(position).getId();
             intent.putExtra("conversationId", conversationid);
+            intent.putExtra("receiverId", usersList.get(position).getId());
             context.startActivity(intent);
         });
     }

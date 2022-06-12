@@ -21,7 +21,7 @@ public class InboxActivity extends AppCompatActivity {
     private ActivityInboxBinding binding;
     private InboxAdapter adapter;
     private List<Message> messageList;
-    private String name, conversationId;
+    private String name, conversationId, receiverId;
     private MessagesViewModel viewModel;
     private PreferenceManger preferenceManger;
     private String TAG = "InboxActivity";
@@ -55,6 +55,7 @@ public class InboxActivity extends AppCompatActivity {
             messageList = new ArrayList<>();
             conversationId = getIntent().getExtras().getString("conversationId");
             name = getIntent().getExtras().getString("name");
+            receiverId = getIntent().getExtras().getString("receiverId");
             preferenceManger = new PreferenceManger(this);
             viewModel = new ViewModelProvider(this).get(MessagesViewModel.class);
             adapter = new InboxAdapter(messageList, this);
@@ -72,7 +73,7 @@ public class InboxActivity extends AppCompatActivity {
         binding.btnSend.setOnClickListener(view -> {
             String message = binding.etMessage.getText().toString();
             if (!message.isEmpty()) {
-                viewModel.sendMessage(message, conversationId, preferenceManger.getUserId(), preferenceManger.getUserName());
+                viewModel.sendMessage(message, conversationId, preferenceManger.getUserId(), preferenceManger.getUserName(),receiverId);
             }
         });
     }

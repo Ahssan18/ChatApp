@@ -36,7 +36,7 @@ public class ConversationRepository {
                 try {
                     for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                         Map<String, String> map = (Map<String, String>) snapshot1.getValue();
-                        conversationList.add(new Conversation(map.get("lastMessage"), map.get("timeStamp"), map.get("senderId"), map.get("senderName"), map.get("conversationId")));
+                        conversationList.add(new Conversation(map.get("lastMessage"), map.get("timeStamp"), map.get("senderId"), map.get("senderName"), map.get("conversationId"), map.get("receiverId")));
                     }
                     conversationData.postValue(conversationList);
                 } catch (Exception e) {

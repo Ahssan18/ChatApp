@@ -44,6 +44,8 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
                 Intent intent = new Intent(context, InboxActivity.class);
                 intent.putExtra("name", conversationList.get(position).getSenderName());
                 intent.putExtra("conversationId", conversationList.get(position).getConversationId());
+                intent.putExtra("receiverId", conversationList.get(position).getSenderId());
+
                 context.startActivity(intent);
 
 

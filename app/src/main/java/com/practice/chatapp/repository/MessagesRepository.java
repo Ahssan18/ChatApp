@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.practice.chatapp.model.Conversation;
@@ -32,14 +33,18 @@ public class MessagesRepository {
         messagesLivedata = new MutableLiveData<>();
     }
 
-    public void sendMessage(String message, String conversationId, String senderId, String senderName) {
+    public void sendMessage(String message, String conversationId, String senderId, String senderName, String receiverId) {
         Calendar c = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String strDate = sdf.format(c.getTime());
         database.getReference().child("messages").child(conversationId)
                 .push().setValue(new Message(message, senderId, strDate));
-        database.getReference().child("conversations").child(senderId).
-                child(conversationId).setValue(new Conversation(message, strDate, senderId, senderName, conversationId));
+        DatabaseReference reference = database.getReference().child("conversations");
+        Conversation conversation = new Conversation(message, strDate, senderId, senderName, conversationId, receiverId);
+        reference.child(senderId).
+                child(conversationId).setValue(conversation);
+        reference.child(receiverId).
+                child(conversationId).setValue(conversation);
     }
 
     public void getMessagesFromFirebase(String conversationId) {

@@ -19,8 +19,8 @@ public class MessagesViewModel extends ViewModel {
         errorMessage = messagesRepository.getError();
     }
 
-    public void sendMessage(String message, String conversationId, String senderId, String senderName) {
-        messagesRepository.sendMessage(message, conversationId, senderId, senderName);
+    public void sendMessage(String message, String conversationId, String senderId, String senderName, String receiverId) {
+        messagesRepository.sendMessage(message, conversationId, senderId, senderName, receiverId);
     }
 
     public void getMessagesFromFirebase(String conversationId) {
