@@ -2,6 +2,7 @@ package com.practice.chatapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -16,6 +17,7 @@ import java.util.List;
 
 public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapter.CustomConversation> {
     private Context context;
+    private String TAG = "ConversationAdapter";
     private List<Conversation> conversationList;
 
     public ConversationAdapter(Context context, List<Conversation> conversationList) {
@@ -33,17 +35,22 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     @Override
     public void onBindViewHolder(@NonNull CustomConversation holder, int position) {
         Conversation conversation = conversationList.get(position);
-        holder.binding.tvUserName.setText(conversation.getSenderName());
-        holder.binding.tvLastMessage.setText(conversation.getLastMessage());
-        holder.binding.tvTimeStamp.setText(conversation.getTimeStamp());
-        holder.binding.constraintUser.setOnClickListener(view -> {
-            Intent intent = new Intent(context, InboxActivity.class);
-            intent.putExtra("name", conversationList.get(position).getSenderName());
-            intent.putExtra("conversationId", "");
-            context.startActivity(intent);
+        Log.e(TAG, "conversation " + conversation.toString());
+        try {
+            holder.binding.tvUserName.setText(conversation.getSenderName());
+            holder.binding.tvLastMessage.setText(conversation.getLastMessage());
+            holder.binding.tvTimeStamp.setText(conversation.getTimeStamp());
+            holder.binding.constraintUser.setOnClickListener(view -> {
+                Intent intent = new Intent(context, InboxActivity.class);
+                intent.putExtra("name", conversationList.get(position).getSenderName());
+                intent.putExtra("conversationId", conversationList.get(position).getConversationId());
+                context.startActivity(intent);
 
 
-        });
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -57,6 +64,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
 
         public CustomConversation(@NonNull CustomConversationBinding binding) {
             super(binding.getRoot());
+            this.binding = binding;
         }
     }
 }

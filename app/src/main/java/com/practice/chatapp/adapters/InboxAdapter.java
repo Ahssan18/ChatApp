@@ -1,6 +1,7 @@
 package com.practice.chatapp.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -18,6 +19,7 @@ public class InboxAdapter extends RecyclerView.Adapter<InboxAdapter.CustomMessag
     private List<Message> messageList;
     private Context context;
     private PreferenceManger preferenceManger;
+    private String TAG = "InboxAdapter";
 
     public InboxAdapter(List<Message> messageList, Context context) {
         this.messageList = messageList;
@@ -57,6 +59,7 @@ public class InboxAdapter extends RecyclerView.Adapter<InboxAdapter.CustomMessag
 
     @Override
     public int getItemCount() {
+        Log.e(TAG, "getItemCount :" + messageList.size());
         return messageList.size();
     }
 

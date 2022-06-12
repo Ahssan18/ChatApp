@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:background="#4CAF50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/iv_back"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:src="@drawable/ic_back"
@@ -33,6 +33,7 @@
             android:layout_marginBottom="10dp"
             android:src="@drawable/ic_user_image"
             android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/iv_back"
             app:layout_constraintStart_toEndOf="@id/iv_back"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -73,8 +74,8 @@
             android:layout_height="match_parent"
             android:layout_weight="4"
             android:hint="enter message here"
-            android:textColor="@drawable/ic_back"
-            android:textColorHint="@drawable/ic_back" />
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
 
         <ImageView
             android:id="@+id/btn_send"

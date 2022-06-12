@@ -12,12 +12,14 @@ import com.practice.chatapp.model.Conversation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ConversationRepository {
     private MutableLiveData<List<Conversation>> conversationData;
     private MutableLiveData<String> errorMessage;
     private FirebaseDatabase database;
     private List<Conversation> conversationList;
+    private String TAG = "ConversationRepository";
 
     public ConversationRepository() {
         conversationData = new MutableLiveData<>();
@@ -27,13 +29,19 @@ public class ConversationRepository {
     }
 
     public void getConversationFromFirebase(String id) {
-        database.getReference().child("conversations").addValueEventListener(new ValueEventListener() {
+        database.getReference().child("conversations").child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                    conversationList.add((snapshot.getValue(Conversation.class)));
+                conversationList.clear();
+                try {
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                        Map<String, String> map = (Map<String, String>) snapshot1.getValue();
+                        conversationList.add(new Conversation(map.get("lastMessage"), map.get("timeStamp"), map.get("senderId"), map.get("senderName"), map.get("conversationId")));
+                    }
+                    conversationData.postValue(conversationList);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                conversationData.postValue(conversationList);
             }
 
             @Override
@@ -51,3 +59,4 @@ public class ConversationRepository {
         return errorMessage;
     }
 }
+

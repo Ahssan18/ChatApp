@@ -19,16 +19,15 @@ public class MessagesViewModel extends ViewModel {
         errorMessage = messagesRepository.getError();
     }
 
-    public void sendMessage(String message, String conversationId, String senderId) {
-        messagesRepository.sendMessage(message, conversationId, senderId);
+    public void sendMessage(String message, String conversationId, String senderId, String senderName) {
+        messagesRepository.sendMessage(message, conversationId, senderId, senderName);
     }
 
-    public void getMessagesFromFirebase(String conversationid) {
-        messagesRepository.getMessagesFromFirebase(conversationid);
+    public void getMessagesFromFirebase(String conversationId) {
+        messagesRepository.getMessagesFromFirebase(conversationId);
     }
 
     public LiveData<List<Message>> getMessages() {
-
         return messagesLivedata;
     }
 

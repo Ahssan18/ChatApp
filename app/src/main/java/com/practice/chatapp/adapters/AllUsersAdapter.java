@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.practice.chatapp.Utils.PreferenceManger;
 import com.practice.chatapp.databinding.CustomUsersBinding;
 import com.practice.chatapp.model.User;
+import com.practice.chatapp.ui.InboxActivity;
 
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class AllUsersAdapter extends RecyclerView.Adapter<AllUsersAdapter.Custom
     public void onBindViewHolder(@NonNull CustomUser holder, int position) {
         holder.binding.tvUserName.setText(usersList.get(position).getName());
         holder.binding.constraintUser.setOnClickListener(view -> {
-            Intent intent = new Intent(context, InboxAdapter.class);
+            Intent intent = new Intent(context, InboxActivity.class);
             intent.putExtra("name", usersList.get(position).getName());
             String conversationid = preferenceManger.getUserId() + usersList.get(position).getId();
             intent.putExtra("conversationId", conversationid);

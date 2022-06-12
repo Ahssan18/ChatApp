@@ -25,7 +25,15 @@ public class PreferenceManger {
 
     }
 
+    public void logoutData() {
+        getSharePreference().edit().clear().apply();
+    }
+
     public String getUserId() {
         return getSharePreference().getString("id", "-1");
+    }
+
+    public String getUserName() {
+        return getSharePreference().getString("name", "");
     }
 }

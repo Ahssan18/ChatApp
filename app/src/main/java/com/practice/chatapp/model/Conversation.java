@@ -1,16 +1,29 @@
 package com.practice.chatapp.model;
 
 public class Conversation {
-    String lastMessage,timeStamp,senderId,senderName;
+    String lastMessage;
+    String timeStamp;
+    String senderId;
+    String senderName;
+    String conversationId;
 
-    public Conversation(String lastMessage, String timeStamp, String senderId, String senderName) {
+    public Conversation(String lastMessage, String timeStamp, String senderId, String senderName, String conversationId) {
         this.lastMessage = lastMessage;
         this.timeStamp = timeStamp;
         this.senderId = senderId;
         this.senderName = senderName;
+        this.conversationId = conversationId;
     }
 
     public Conversation() {
+    }
+
+    public String getConversationId() {
+        return conversationId;
+    }
+
+    public void setConversationId(String conversationId) {
+        this.conversationId = conversationId;
     }
 
     public String getLastMessage() {
@@ -52,6 +65,7 @@ public class Conversation {
                 ", timeStamp='" + timeStamp + '\'' +
                 ", senderId='" + senderId + '\'' +
                 ", senderName='" + senderName + '\'' +
+                ", conversationId='" + conversationId + '\'' +
                 '}';
     }
 }

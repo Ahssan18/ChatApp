@@ -20,7 +20,7 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if (preferenceManger.getUserId().equals("-1")) {
+        if (!preferenceManger.getUserId().equals("-1")) {
             startActivity(new Intent(this, ConversationActivity.class));
         }
     }
